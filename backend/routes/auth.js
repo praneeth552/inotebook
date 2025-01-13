@@ -6,8 +6,10 @@ const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 const fetchuser = require("../middleware/fetchuser")
 const JWT_SECRET_KEY = "praneeth"
+
+
 router.post('/createuser', [
-    body('name', "Enter the name").isLength({ min: 3 }),
+    body('name', "Enter valid name").isLength({ min: 3 }),
     body('email', "Enter email properly").isEmail(),
     body('password', "Password must be atleast 5 characters").isLength({ min: 5 }),
 ], async (req, res) => {
