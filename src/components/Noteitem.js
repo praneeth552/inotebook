@@ -17,6 +17,7 @@ const Noteitem = (props) => {
                             <i className="fa-solid fa-pen-to-square" onClick={() =>{updateNote(note)}}></i>
                         </div>
                         <p className="card-text">{note.description}</p>
+                        <p className="card-text"><small className="text-body-secondary">{note.tag}</small></p>
                     </div>
                 </div>
             </div>
