@@ -13,10 +13,11 @@ router.post('/createuser', [
     body('email', "Enter email properly").isEmail(),
     body('password', "Password must be atleast 5 characters").isLength({ min: 5 }),
 ], async (req, res) => {
+    let success = false
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.log(errors);
-        return res.status(400).json({ error: errors.array() })
+        return res.status(400).json({ success, error: errors.array() })
     }
     try {
         let user = await User.findOne({ email: req.body.email })
@@ -36,7 +37,8 @@ router.post('/createuser', [
             }
         }
         const authToken = jwt.sign(data,JWT_SECRET_KEY)
-        res.json({authToken})
+        success = true
+        res.json({success,authToken})
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Occured")
@@ -47,21 +49,22 @@ router.post('/login', [
     body('email', "Enter email properly").isEmail(),
     body('password', "Password must be atleast 5 characters").exists()
 ], async (req, res) => {
+    let success = false
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.log(errors);
-        return res.status(400).json({ error: errors.array() })
+        return res.status(400).json({ success, error: errors.array() })
     }
     const {email, password} = req.body;
     try {
         let user = await User.findOne({email})
         if (!user){
-            res.status(400).json({error: "Please enter correct credentials"})
+            res.status(400).json({success, error: "Please enter correct credentials"})
         }
 
         const passwordCompare = await bcrypt.compare(password, user.password);
         if (!passwordCompare){
-            res.status(400).json({error: "Please enter correct credentials"})
+            res.status(400).json({success, error: "Please enter correct credentials"})
         }
 
         const data = {
@@ -70,7 +73,8 @@ router.post('/login', [
             }
         }
         const authToken = jwt.sign(data,JWT_SECRET_KEY)
-        res.json({authToken})        
+        success = true
+        res.json({success, authToken})        
     } catch (error) {
         console.error(error.message);
         // return res.status(500).send("Internal Server Occured");
