@@ -31,6 +31,7 @@ const Login = (props) => {
     }
     return (
         <div>
+            <h2 className='mb-4'>Login to Continue with inotebook</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
@@ -41,7 +42,7 @@ const Login = (props) => {
                     <label htmlFor="password" className="form-label">Password</label>
                     <input type="password" className="form-control"  id="password" name='password' value={credentials.password} onChange={onChange}/>
                 </div>
-                <button type="submit" className="btn btn-primary">Login</button>
+                <button disabled={credentials.email.length === 0 || credentials.password.length === 0} type="submit" className="btn btn-primary">Login</button>
             </form>
         </div>
     )
