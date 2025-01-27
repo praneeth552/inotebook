@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "build": "react-scripts build"
+    "build": "cd frontend && npm install && npm run build && cp -r frontend/build ./public"
   },
   "author": "",
   "license": "ISC",
