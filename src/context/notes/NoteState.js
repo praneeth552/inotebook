@@ -8,7 +8,7 @@ const NoteState = (props) => {
     const [notes, setnotes] = useState(notesinitial)
 
     const getNotes = async () => {
-        const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+        const response = await fetch(`https://inotebook-asn5.onrender.com/api/notes/fetchallnotes`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ const NoteState = (props) => {
 
     const addNote = async (title, description, tag) => {
         console.log("Adding new note");
-        const response = await fetch(`${host}/api/notes/addnote`, {
+        const response = await fetch(`https://inotebook-asn5.onrender.com/api/notes/addnote`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ const NoteState = (props) => {
 
     const deleteNote = async (id) => {
         console.log("Deleting note with id" + id);
-        const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
+        const response = await fetch(`https://inotebook-asn5.onrender.com/api/notes/deletenote/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const NoteState = (props) => {
 
     const editNote = async (id, title, description, tag) => {
         console.log(id);
-        const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+        const response = await fetch(`https://inotebook-asn5.onrender.com/api/notes/updatenote/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
